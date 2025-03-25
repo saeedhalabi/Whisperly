@@ -1,0 +1,34 @@
+# Node.js dependencies
+/node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+logs/
+
+# Debug and temporary files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files (for example, macOS and Windows)
+.DS_Store
+Thumbs.db
+
+# Build files
+/dist/
+/build/
+
+# IDE/editor config files (e.g., VSCode, JetBrains, etc.)
+.vscode/
+.idea/
+
+# Coverage directory for test coverage reports
+/coverage/
+
+
+# Temporary files and folders created during development
+*.swp
+*.swo
