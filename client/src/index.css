@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .bg-image {
-  background-image: url("../public/Blob.png");
+  background-image: url("/Blob.png");
   background-size: contain;
   background-position: center;
   height: 100vh;

@@ -29,7 +29,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <main className="bg-image flex flex-col items-center">
+    <form className="bg-image flex flex-col items-center">
       <Title title="Create An Account" />
       <div className="bg-white p-8 rounded-4xl drop-shadow-lg w-96 space-y-5">
         <InputField
@@ -52,6 +52,7 @@ const SignUpPage = () => {
           label="Email Address"
           value={formData.email}
           onChange={handleChange}
+          autoComplete="email"
         />
         <InputField
           type="password"
@@ -59,6 +60,7 @@ const SignUpPage = () => {
           label="Password"
           value={formData.password}
           onChange={handleChange}
+          autoComplete="new-password"
         />
         <InputField
           type="password"
@@ -66,10 +68,11 @@ const SignUpPage = () => {
           label="Confirm Password"
           value={formData.confirmPassword}
           onChange={handleChange}
+          autoComplete="new-password"
         />
         <Button text="Sign Up" />
       </div>
-    </main>
+    </form>
   );
 };
 
