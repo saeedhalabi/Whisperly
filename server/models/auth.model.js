@@ -20,7 +20,6 @@ const authSchema = new mongoose.Schema(
       type: String,
       required: true,
       minlength: 8, // Minimum 8 characters
-      match: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, // At least one uppercase, one number, one special char
     },
   },
   { timestamps: true }
