@@ -5,8 +5,17 @@ dotenv.config();
 import { connectDB } from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 const port = process.env.PORT || 4000;
 const app = express();
+
+// cors
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 // body parser (JSON-encoded bodies)
 app.use(bodyParser.json());

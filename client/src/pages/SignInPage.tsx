@@ -1,7 +1,9 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, FormEvent } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import Title from "../components/Title";
+import { useNavigate } from "react-router";
+import { signIn } from "../utils/api";
 
 interface FormData {
   email: string;
@@ -9,10 +11,15 @@ interface FormData {
 }
 
 const SignInPage = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,10 +29,36 @@ const SignInPage = () => {
     }));
   };
 
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    setError(null);
+    setLoading(true);
+
+    try {
+      const response = await signIn(formData.email, formData.password);
+
+      if (response.status === 200) {
+        setFormData({
+          email: "",
+          password: "",
+        });
+        navigate("/home-page");
+      }
+    } catch (error: any) {
+      setError(error || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <main className="bg-image flex flex-col items-center">
+    <main className="bg-image flex flex-col items-center justify-center">
       <Title title="Sign in to your account" />
-      <form className="bg-white p-8 rounded-4xl drop-shadow-lg w-96 space-y-5">
+      <form
+        className="bg-white p-8 rounded-4xl drop-shadow-lg w-96 space-y-5"
+        onSubmit={handleSubmit}
+      >
         <InputField
           type="email"
           name="email"
@@ -42,7 +75,10 @@ const SignInPage = () => {
           onChange={handleChange}
           autoComplete="new-password"
         />
-        <Button text="Sign In" />
+        {error && (
+          <div className="text-red-700 text-sm text-center">{error}</div>
+        )}
+        <Button text={loading ? "Signing In..." : "Sign In"} />
       </form>
     </main>
   );
