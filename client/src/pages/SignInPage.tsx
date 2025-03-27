@@ -3,17 +3,13 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import Title from "../components/Title";
 import { useNavigate } from "react-router";
-import { signIn } from "../utils/api";
-
-interface FormData {
-  email: string;
-  password: string;
-}
+import { signIn } from "../services/api";
+import { SignInFormData } from "../types/authTypes";
 
 const SignInPage = () => {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<SignInFormData>({
     email: "",
     password: "",
   });
