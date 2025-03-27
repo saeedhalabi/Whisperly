@@ -5,12 +5,16 @@ dotenv.config();
 import { connectDB } from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
 import corsMiddleware from "./middleware/cors.js";
+import logger from "./middleware/logger.js";
 import cookieParser from "cookie-parser";
 const port = process.env.PORT || 4000;
 const app = express();
 
 // CORS middleware
 app.use(corsMiddleware);
+
+// logger middleware
+app.use(logger);
 
 // body parser (JSON-encoded bodies)
 app.use(bodyParser.json());
