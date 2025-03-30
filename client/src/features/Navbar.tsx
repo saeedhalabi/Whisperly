@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { navItemClasses } from "../utils/navbarUtils";
 const Navbar = () => {
   const navigate = useNavigate();
   return (
@@ -8,16 +9,10 @@ const Navbar = () => {
       </h1>
       <div>
         <ul className="flex gap-3 items-center text-sm sm:text-base cursor-pointer mt-2">
-          <li
-            className="bg-indigo-500 rounded-full px-2 py-2 text-white drop-shadow-md"
-            onClick={() => navigate("/sign-in")}
-          >
+          <li className={navItemClasses()} onClick={() => navigate("/sign-in")}>
             Sign In
           </li>
-          <li
-            className="bg-indigo-500 rounded-full px-2 py-2 text-white drop-shadow-md"
-            onClick={() => navigate("/")}
-          >
+          <li className={navItemClasses()} onClick={() => navigate("/")}>
             Sign Up
           </li>
           <li className="text-black">Log out</li>
