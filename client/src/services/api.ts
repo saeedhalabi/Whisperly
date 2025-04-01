@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const url = import.meta.env.VITE_API_URL;
-
 const signInUrl = `${url}/api/auth/signin`;
 const signUpUrl = `${url}/api/auth/signup`;
 const logoutUrl = `${url}/api/auth/logout`;
