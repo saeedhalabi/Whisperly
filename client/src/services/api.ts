@@ -1,13 +1,15 @@
 import axios from "axios";
 
-const url = "http://localhost:8080";
+const url = import.meta.env.VITE_API_URL;
 
-const apiUrl = `${url}/api/auth/signin`;
+const signInUrl = `${url}/api/auth/signin`;
+const signUpUrl = `${url}/api/auth/signup`;
+const logoutUrl = `${url}/api/auth/logout`;
 
 export const signIn = async (email: string, password: string) => {
   try {
     const response = await axios.post(
-      apiUrl,
+      signInUrl,
       { email, password },
       { withCredentials: true }
     );
@@ -19,8 +21,6 @@ export const signIn = async (email: string, password: string) => {
       : "Network error, please try again.";
   }
 };
-
-const signUpUrl = `${url}/api/auth/signup`;
 
 export const signUp = async (
   firstName: string,
@@ -35,6 +35,17 @@ export const signUp = async (
       { withCredentials: true }
     );
 
+    return response;
+  } catch (error: any) {
+    throw error.response
+      ? error.response.data.message
+      : "Network error, please try again.";
+  }
+};
+
+export const logout = async () => {
+  try {
+    const response = await axios.post(logoutUrl, {}, { withCredentials: true });
     return response;
   } catch (error: any) {
     throw error.response

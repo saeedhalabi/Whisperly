@@ -1,7 +1,18 @@
 import { useNavigate } from "react-router";
 import { navItemClasses } from "../utils/navbarUtils";
+import { logout } from "../services/api";
 const Navbar = () => {
   const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    try {
+      await logout();
+      navigate("/sign-in");
+    } catch (error: any) {
+      console.error("Logout failed", error);
+    }
+  };
+
   return (
     <nav className="flex justify-between p-5">
       <h1 className="text-black mt-3">
@@ -15,7 +26,9 @@ const Navbar = () => {
           <li className={navItemClasses()} onClick={() => navigate("/")}>
             Sign Up
           </li>
-          <li className="text-black">Log out</li>
+          <li className="text-black" onClick={handleSubmit}>
+            Log out
+          </li>
         </ul>
       </div>
     </nav>
