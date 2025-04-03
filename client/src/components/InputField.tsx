@@ -19,7 +19,7 @@ const InputField = ({
 }: InputProps) => {
   return (
     <section className="flex flex-col">
-      <label className="text-sm text-gray-900 mb-0.5">{label}</label>
+      <label className="text-sm text-gray-900 mb-0.5 ml-2">{label}</label>
       <input
         type={type}
         value={value}
