@@ -4,9 +4,9 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import Title from "../components/Title";
 import { signUp } from "../services/api";
-import { SignUpFormData } from "../types/authTypes";
+import { SignUpFormData } from "../types/auth.types";
 
-const SignUpPage = () => {
+const SignUpPage: React.FC = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<SignUpFormData>({

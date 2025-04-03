@@ -10,5 +10,4 @@ const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   return <ChatContext.Provider value={null}>{children}</ChatContext.Provider>;
 };
 
-
-export default ChatProvider
+export default ChatProvider;

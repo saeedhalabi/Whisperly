@@ -4,9 +4,9 @@ import Button from "../components/Button";
 import Title from "../components/Title";
 import { useNavigate } from "react-router";
 import { signIn } from "../services/api";
-import { SignInFormData } from "../types/authTypes";
+import { SignInFormData } from "../types/auth.types";
 
-const SignInPage = () => {
+const SignInPage: React.FC = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<SignInFormData>({

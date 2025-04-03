@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router";
 import SignUpPage from "../pages/SignUpPage";
 import SignInPage from "../pages/SignInPage";
 import Homepage from "../pages/Homepage";
-const AppRouter = () => {
+const AppRouter: React.FC = () => {
   return (
     <Routes>
       <Route index path="/" element={<SignUpPage />} />
