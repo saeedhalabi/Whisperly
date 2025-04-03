@@ -14,12 +14,12 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex justify-between p-5">
-      <h1 className="text-black mt-3">
+    <nav className="flex justify-between p-4">
+      <h1 className="text-black mt-3 text-sm">
         Whisper<span className="text-indigo-500">ly</span>
       </h1>
       <div>
-        <ul className="flex gap-3 items-center text-base sm:text-base cursor-pointer mt-2">
+        <ul className="flex lg:gap-3 sm:gap-0 items-center text-base sm:text-sm cursor-pointer mt-2 text-font">
           <li className={navItemClasses()} onClick={() => navigate("/sign-in")}>
             Sign In
           </li>
