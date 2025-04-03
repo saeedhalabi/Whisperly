@@ -4,7 +4,7 @@ interface UserItemProps {
 }
 
 const UserItem: React.FC<UserItemProps> = ({ user }) => {
-  const isUserOnline = user.isOnline === true || user.isOnline === "online";
+  const isUserOnline = user.isOnline === true;
   const statusText = isUserOnline ? "Online" : "Offline";
 
   return (

@@ -3,5 +3,5 @@ export interface User {
   firstName: string;
   lastName: string;
   lastSeen?: string;
-  isOnline?: boolean | string;
+  isOnline: boolean;
 }
