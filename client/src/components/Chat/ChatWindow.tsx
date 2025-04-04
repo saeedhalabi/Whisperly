@@ -8,7 +8,6 @@ const ChatWindow: React.FC = () => {
         {/* Header */}
         <header className="bg-indigo-600 p-4 text-white">
           <div className="text-lg font-bold">{receiverName}</div>
-          <div className="text-sm">Online</div>
         </header>
 
         {/* Chat Window */}
@@ -26,7 +25,6 @@ const ChatWindow: React.FC = () => {
               <div className="bg-indigo-600 text-white p-3 rounded-lg max-w-xs">
                 <div className="text-xs font-bold">{receiverName}</div>
                 <p>I'm doing great, thanks!</p>
-                <div className="text-xs text-gray-400">Delivered</div>
               </div>
             </div>
             {/* Add more messages as needed */}
