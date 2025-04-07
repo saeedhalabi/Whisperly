@@ -14,7 +14,7 @@ const ChatWindow: React.FC = () => {
         {/* Header */}
         <header className="bg-indigo-600 p-4 text-white">
           <div className="text-lg font-bold">
-            {selectedUser?.firstName} {selectedUser?.lastName}
+            {selectedUser?.firstname} {selectedUser?.lastname}
           </div>
         </header>
 
