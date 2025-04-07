@@ -40,12 +40,10 @@ export const signUp = async (req, res) => {
       .json({ message: "Your account has been created successfully" });
   } catch (error) {
     console.error("Sign Up Error", error);
-    res
-      .status(500)
-      .json({
-        message:
-          "Something went wrong during registration. Please try again later",
-      });
+    res.status(500).json({
+      message:
+        "Something went wrong during registration. Please try again later",
+    });
   }
 };
 
