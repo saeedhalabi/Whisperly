@@ -114,15 +114,35 @@ export const logout = async (req, res) => {
 // get users
 export const getUsers = async (req, res) => {
   try {
-    const users = await Auth.find({}, "id firstname lastname");
-    if (!users) {
-      return res
-        .status(400)
-        .json({ message: "No users found in the database" });
+    // Extract the token from the cookie
+    const token = req.cookies.token;
+
+    // If no token exists, return unauthorized
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    // Verify the token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // Get the authenticated user's ID
+    const currentUserId = decoded.userId;
+
+    // Fetch all users excluding the current user
+    const users = await Auth.find(
+      { _id: { $ne: currentUserId } },
+      "id firstname lastname"
+    );
+
+    if (!users || users.length === 0) {
+      return res.status(400).json({ message: "No users found" });
     } else {
-      res.status(200).json({ message: "Users fetched successfully", users });
+      return res
+        .status(200)
+        .json({ message: "Users fetched successfully", users });
     }
   } catch (error) {
+    console.error("Error fetching users", error);
     res.status(500).json({
       message:
         "Something went wrong while retrieving users. Please try again later",

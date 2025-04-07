@@ -56,7 +56,9 @@ export const logout = async () => {
 
 export const getUsers = async () => {
   try {
-    const response = await axios.get(getUsersUrl);
+    const response = await axios.get(getUsersUrl, {
+      withCredentials: true,
+    });
     return response.data.users;
   } catch (error: any) {
     throw error.response
