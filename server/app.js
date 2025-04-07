@@ -7,29 +7,44 @@ import authRoute from "./routes/authRoute.js";
 import corsMiddleware from "./middleware/cors.js";
 import logger from "./middleware/logger.js";
 import cookieParser from "cookie-parser";
-const port = process.env.PORT || 4000;
+import { Server } from "socket.io";
+import http from "http"; // if you're not using this already
+
+const port = process.env.PORT;
 const app = express();
 
-// CORS middleware
+// Middleware
 app.use(corsMiddleware);
-
-// logger middleware
 app.use(logger);
-
-// body parser (JSON-encoded bodies)
 app.use(bodyParser.json());
-
-// Middleware to handle cookies
 app.use(cookieParser());
-
-// body parser (URL-encoded bodies)
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/auth", authRoute);
 
-// listen for a port
-app.listen(port, () => {
+// Create HTTP server
+const server = http.createServer(app);
+
+// Create socket server with CORS support
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    credentials: true,
+  },
+});
+
+// Handle socket connections
+io.on("connection", socket => {
+  console.log("✅ a user connected:", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("❌ user disconnected:", socket.id);
+  });
+});
+
+// Start server
+server.listen(port, () => {
   connectDB();
-  console.log(`Server running on port ${port}`);
+  console.log(`🚀 Server running on port ${port}`);
 });
