@@ -8,7 +8,7 @@ import corsMiddleware from "./middleware/cors.js";
 import logger from "./middleware/logger.js";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
-import http from "http"; // if you're not using this already
+import http from "http"; 
 
 const port = process.env.PORT;
 const app = express();
