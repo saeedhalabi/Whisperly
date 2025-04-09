@@ -1,11 +1,6 @@
 import { useEffect } from "react";
 import AppRouter from "./router/AppRouter";
-import { io } from "socket.io-client";
-
-export const socket = io(import.meta.env.VITE_API_URL, {
-  withCredentials: true,
-  autoConnect: false,
-});
+import { socket } from "./utils/socket";
 
 const App: React.FC = () => {
   useEffect(() => {

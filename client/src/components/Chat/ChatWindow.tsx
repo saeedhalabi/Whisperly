@@ -1,8 +1,26 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import ChatContext from "../../context/ChatContext";
+import { socket } from "../../utils/socket";
+import Messages from "./Messages";
 import MessageInput from "./MessageInput";
+
 const ChatWindow: React.FC = () => {
   const { selectedUser } = useContext(ChatContext);
+  const [messages, setMessages] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (!selectedUser) return;
+
+    socket.on("receiveMessage", (message: any) => {
+      const isSender = message.senderId === selectedUser._id;
+
+      setMessages(prevMessages => [...prevMessages, { ...message, isSender }]);
+    });
+
+    return () => {
+      socket.off("receiveMessage");
+    };
+  }, [selectedUser]);
 
   if (!selectedUser) {
     return null;
@@ -18,13 +36,10 @@ const ChatWindow: React.FC = () => {
           </div>
         </header>
 
-        {/* Chat Window */}
         <div className="flex-1 p-4 overflow-y-auto">
-          <div className="flex flex-col space-y-4">
-            {/* Sender's Message */}
-          </div>
+          <Messages messages={messages} />
         </div>
-        {/* Message input */}
+
         <MessageInput />
       </section>
     </main>

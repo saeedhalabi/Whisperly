@@ -28,7 +28,7 @@ const UserList: React.FC = () => {
       {/* Map through users and render UserItem */}
       <div>
         {users.map(user => (
-          <UserItem key={user.id} user={user} />
+          <UserItem key={user._id} user={user} />
         ))}
       </div>
     </section>

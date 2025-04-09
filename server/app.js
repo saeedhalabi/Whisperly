@@ -8,7 +8,7 @@ import corsMiddleware from "./middleware/cors.js";
 import logger from "./middleware/logger.js";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
-import http from "http"; 
+import http from "http";
 
 const port = process.env.PORT;
 const app = express();
@@ -37,6 +37,10 @@ const io = new Server(server, {
 // Handle socket connections
 io.on("connection", socket => {
   console.log("✅ a user connected:", socket.id);
+
+  socket.on("sendMessage", message => {
+    io.emit("receiveMessage", message);
+  });
 
   socket.on("disconnect", () => {
     console.log("❌ user disconnected:", socket.id);

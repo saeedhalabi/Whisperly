@@ -1,15 +1,42 @@
+import { useState } from "react";
+import { socket } from "../../utils/socket";
+import { useContext } from "react";
+import ChatContext from "../../context/ChatContext";
+
 const MessageInput: React.FC = () => {
+  const { selectedUser } = useContext(ChatContext);
+  const [messageText, setMessageText] = useState("");
+
+  const handleSendMessage = () => {
+    if (!messageText || !selectedUser) return;
+
+    socket.emit("sendMessage", {
+      text: messageText,
+      senderId: selectedUser._id,
+      receiverId: selectedUser._id,
+    });
+
+    setMessageText("");
+  };
+
   return (
-    <footer className="bg-indigo-600 p-4 flex items-center">
+    <div className="flex items-center space-x-4 p-4 bg-indigo-700 rounded-b-lg">
+      {/* Message Input */}
       <input
         type="text"
-        className="flex-1 p-2 rounded-l-lg outline-none text-white"
+        value={messageText}
+        onChange={e => setMessageText(e.target.value)}
         placeholder="Type your message..."
+        className="flex-1 p-3 rounded-lg bg-white text-black border border-gray-300 outline-none"
       />
-      <button className="bg-white p-2 rounded-r-lg ml-2 cursor-pointer">
-        <span className="text-indigo-600">Send</span>
+      {/* Send Button */}
+      <button
+        onClick={handleSendMessage}
+        className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 focus:outline-none cursor-pointer"
+      >
+        Send
       </button>
-    </footer>
+    </div>
   );
 };
 
