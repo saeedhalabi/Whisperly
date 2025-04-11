@@ -5,6 +5,7 @@ import Title from "../components/Title";
 import { useNavigate } from "react-router";
 import { signIn } from "../services/api";
 import { SignInFormData } from "../types/auth.types";
+import SignIn from "../features/auth/SignIn";
 
 const SignInPage: React.FC = () => {
   const navigate = useNavigate();
@@ -76,6 +77,7 @@ const SignInPage: React.FC = () => {
           <div className="text-red-700 text-sm text-center">{error}</div>
         )}
         <Button text={loading ? "Signing In..." : "Sign In"} />
+        <SignIn />
       </form>
     </main>
   );

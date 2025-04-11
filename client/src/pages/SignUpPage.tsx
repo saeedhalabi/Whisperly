@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import Title from "../components/Title";
 import { signUp } from "../services/api";
 import { SignUpFormData } from "../types/auth.types";
+import SignUp from "../features/auth/SignUp";
 
 const SignUpPage: React.FC = () => {
   const navigate = useNavigate();
@@ -123,6 +124,7 @@ const SignUpPage: React.FC = () => {
         )}
 
         <Button text={loading ? "Signing Up..." : "Sign Up"} />
+        <SignUp />
       </div>
     </form>
   );
