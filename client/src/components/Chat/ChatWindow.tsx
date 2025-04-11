@@ -28,9 +28,9 @@ const ChatWindow: React.FC = () => {
 
   return (
     <main className="flex justify-center items-center mb-32 sm:absolute sm:top-32 sm:left-2/4 sm:w-96 w-full">
-      <section className="bg-gradient-to-r from-indigo-500 to-indigo-700 sm:w-96 w-full h-[80vh] rounded-lg shadow-lg flex flex-col">
+      <section className="bg-gradient-to-r from-indigo-700 to-indigo-500 sm:w-96 w-full h-[80vh] rounded-lg shadow-lg flex flex-col">
         {/* Header */}
-        <header className="bg-indigo-600 p-4 text-white">
+        <header className="bg-indigo-500 p-4 text-white">
           <div className="text-lg font-bold">
             {selectedUser?.firstname} {selectedUser?.lastname}
           </div>
