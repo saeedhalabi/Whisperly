@@ -35,6 +35,7 @@ const SignInPage: React.FC = () => {
       const response = await signIn(formData.email, formData.password);
 
       if (response.status === 200) {
+        localStorage.setItem("userEmail", formData.email);
         setFormData({
           email: "",
           password: "",
