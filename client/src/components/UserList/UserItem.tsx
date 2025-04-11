@@ -12,7 +12,6 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
       className="flex items-center justify-between p-3 bg-white rounded-lg shadow-md cursor-pointer my-3"
       onClick={() => setSelectedUser(user)}
     >
-      {/* User Name & Last Seen */}
       <div>
         <p className="font-medium text-black">
           {user.firstname} {user.lastname}
