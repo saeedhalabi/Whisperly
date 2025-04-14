@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { getCurrentUser } from "../../services/api";
 import ChatContext from "../../context/ChatContext";
 
 interface MessageInputProps {
