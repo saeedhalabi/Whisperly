@@ -1,26 +1,86 @@
 import { useContext, useEffect, useState } from "react";
 import ChatContext from "../../context/ChatContext";
 import { socket } from "../../utils/socket";
-import Messages from "./Messages";
 import MessageInput from "./MessageInput";
+import { getCurrentUser } from "../../services/api";
 
 const ChatWindow: React.FC = () => {
   const { selectedUser } = useContext(ChatContext);
   const [messages, setMessages] = useState<any[]>([]);
 
   useEffect(() => {
-    if (!selectedUser) return;
+    const fetchCurrentUser = async () => {
+      try {
+        const currentUser = await getCurrentUser();
+        if (!currentUser) {
+          console.error("No current user found");
+          return;
+        }
 
-    socket.on("receiveMessage", (message: any) => {
-      const isSender = message.senderId === selectedUser._id;
+        // Register socket listeners for incoming messages
+        socket.on("receiveMessage", (message: any) => {
+          setMessages(prevMessages => [
+            ...prevMessages,
+            { ...message, isSender: false }, // Received message (from other user)
+          ]);
+        });
 
-      setMessages(prevMessages => [...prevMessages, { ...message, isSender }]);
-    });
+        socket.on("addMessage", (message: any) => {
+          setMessages(prevMessages => [
+            ...prevMessages,
+            { ...message, isSender: true }, // Sent message (from user)
+          ]);
+        });
+      } catch (error) {
+        console.error("Error fetching current user:", error);
+      }
+    };
 
+    if (selectedUser) {
+      fetchCurrentUser();
+    }
+
+    // Clean up socket listeners on unmount
     return () => {
       socket.off("receiveMessage");
+      socket.off("addMessage");
     };
   }, [selectedUser]);
+
+  const handleSendMessage = async (messageText: string) => {
+    if (!messageText || !selectedUser) return;
+
+    try {
+      const currentUser = await getCurrentUser();
+
+      // Immediately add the sent message to the state
+      setMessages(prevMessages => [
+        ...prevMessages,
+        {
+          text: messageText,
+          senderId: currentUser._id,
+          receiverId: selectedUser._id,
+          isSender: true,
+        },
+      ]);
+
+      // Emit the message to the socket
+      socket.emit("sendMessage", {
+        text: messageText,
+        senderId: currentUser._id,
+        receiverId: selectedUser._id,
+      });
+
+      socket.emit("addMessage", {
+        text: messageText,
+        senderId: currentUser._id,
+        receiverId: selectedUser._id,
+        isSender: true,
+      });
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
 
   if (!selectedUser) {
     return null;
@@ -36,11 +96,31 @@ const ChatWindow: React.FC = () => {
           </div>
         </header>
 
-        <div className="flex-1 p-4 overflow-y-auto">
-          <Messages messages={messages} />
+        {/* Chat Messages */}
+        <div className="flex flex-col p-4 overflow-y-auto flex-grow space-y-4">
+          {/* Render Messages */}
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`flex ${
+                message.isSender ? "justify-end" : "justify-start"
+              }`}
+            >
+              <div
+                className={`max-w-xs p-3 rounded-lg ${
+                  message.isSender
+                    ? "bg-indigo-500 text-white drop-shadow-2xl"
+                    : "bg-gray-300 text-black drop-shadow-2xl"
+                }`}
+              >
+                {message.text}
+              </div>
+            </div>
+          ))}
         </div>
 
-        <MessageInput />
+        {/* Message Input */}
+        <MessageInput onSendMessage={handleSendMessage} />
       </section>
     </main>
   );

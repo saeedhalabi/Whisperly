@@ -4,6 +4,7 @@ import {
   signIn,
   logout,
   getUsers,
+  getCurrentUser,
 } from "../controllers/authController.js";
 const router = express.Router();
 
@@ -18,5 +19,8 @@ router.post("/logout", logout);
 
 // Users
 router.get("/users", getUsers);
+
+// Current User
+router.get("/me", getCurrentUser);
 
 export default router;

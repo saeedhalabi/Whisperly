@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import AppRouter from "./router/AppRouter";
 import { socket } from "./utils/socket";
-
 const App: React.FC = () => {
   useEffect(() => {
     socket.connect();

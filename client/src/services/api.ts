@@ -5,8 +5,6 @@ const signInUrl = `${url}/api/auth/signin`;
 const signUpUrl = `${url}/api/auth/signup`;
 const logoutUrl = `${url}/api/auth/logout`;
 const getUsersUrl = `${url}/api/auth/users`;
-const getMessagesUrl = (receiverId: string) =>
-  `${url}/api/message/${receiverId}`;
 
 export const signIn = async (email: string, password: string) => {
   try {
@@ -69,12 +67,14 @@ export const getUsers = async () => {
   }
 };
 
-export const getMessages = async (receiverId: string) => {
+// Function to get the current user
+export const getCurrentUser = async () => {
   try {
-    const response = await axios.get(getMessagesUrl(receiverId), {
-      withCredentials: true,
+    const response = await axios.get(`${url}/api/auth/me`, {
+      withCredentials: true, // This ensures the cookie is sent
     });
-    return response.data;
+
+    return response.data.user; // Return the user object
   } catch (error: any) {
     throw error.response
       ? error.response.data.message

@@ -1,23 +1,20 @@
-import { useState } from "react";
-import { socket } from "../../utils/socket";
-import { useContext } from "react";
-import ChatContext from "../../context/ChatContext";
+import { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { getCurrentUser } from "../../services/api";
+import ChatContext from "../../context/ChatContext";
 
-const MessageInput: React.FC = () => {
+interface MessageInputProps {
+  onSendMessage: (messageText: string) => void;
+}
+
+const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
   const { selectedUser } = useContext(ChatContext);
   const [messageText, setMessageText] = useState("");
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!messageText || !selectedUser) return;
-
-    socket.emit("sendMessage", {
-      text: messageText,
-      senderId: selectedUser._id,
-      receiverId: selectedUser._id,
-    });
-
+    onSendMessage(messageText);
     setMessageText("");
   };
 

@@ -149,3 +149,28 @@ export const getUsers = async (req, res) => {
     });
   }
 };
+
+// Get current user info from token
+export const getCurrentUser = async (req, res) => {
+  try {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await Auth.findById(decoded.userId).select(
+      "id firstname lastname email"
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ user });
+  } catch (err) {
+    console.error("Get Current User Error:", err);
+    res.status(500).json({ message: "Failed to fetch current user" });
+  }
+};

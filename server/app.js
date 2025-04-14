@@ -13,6 +13,9 @@ import http from "http";
 const port = process.env.PORT;
 const app = express();
 
+// Store the users and their socket IDs
+const connectedUsers = {};
+
 // Middleware
 app.use(corsMiddleware);
 app.use(logger);
@@ -38,12 +41,35 @@ const io = new Server(server, {
 io.on("connection", socket => {
   console.log("✅ a user connected:", socket.id);
 
-  socket.on("sendMessage", message => {
-    io.emit("receiveMessage", message);
+  socket.on("registerUser", userId => {
+    connectedUsers[userId] = socket.id;
+    console.log(`User ${userId} connected with socket ID ${socket.id}`);
   });
 
+  // Handle sendMessage event
+  socket.on("sendMessage", message => {
+    const { text, senderId, receiverId } = message;
+    if (connectedUsers[receiverId]) {
+      io.to(connectedUsers[receiverId]).emit("receiveMessage", {
+        text,
+        senderId,
+        receiverId,
+      });
+      console.log(`Message sent to user ${receiverId}`);
+    } else {
+      console.log("Receiver not connected.");
+    }
+  });
+
+  // Handle disconnect
   socket.on("disconnect", () => {
-    console.log("❌ user disconnected:", socket.id);
+    for (const userId in connectedUsers) {
+      if (connectedUsers[userId] === socket.id) {
+        delete connectedUsers[userId];
+        console.log(`User ${userId} disconnected`);
+        break;
+      }
+    }
   });
 });
 
