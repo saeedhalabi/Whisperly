@@ -49,7 +49,15 @@ io.on("connection", socket => {
   socket.on("sendMessage", message => {
     const { text, senderId, receiverId } = message;
     if (connectedUsers[receiverId]) {
+      // Emit to the receiver only
       io.to(connectedUsers[receiverId]).emit("receiveMessage", {
+        text,
+        senderId,
+        receiverId,
+      });
+
+      // Optionally, you can emit an acknowledgment to the sender if needed
+      io.to(socket.id).emit("messageSent", {
         text,
         senderId,
         receiverId,

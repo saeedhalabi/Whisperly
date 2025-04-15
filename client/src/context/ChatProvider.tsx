@@ -1,19 +1,27 @@
-import { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import ChatContext from "./ChatContext";
 import { User } from "../types/user.types";
-// Define the type for the children prop
-type ChatProviderProps = {
-  children: ReactNode;
-};
 
-const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
+const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [allMessages, setAllMessages] = useState<{ [userId: string]: any[] }>(
+    {}
+  );
 
   return (
-    <ChatContext.Provider value={{ selectedUser, setSelectedUser }}>
+    <ChatContext.Provider
+      value={{
+        selectedUser,
+        setSelectedUser,
+        allMessages,
+        setAllMessages,
+      }}
+    >
       {children}
     </ChatContext.Provider>
   );
 };
 
-export default ChatProvider;
+export default ChatContextProvider;
