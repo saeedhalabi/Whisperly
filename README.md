@@ -25,22 +25,21 @@ Database: MongoDB (with Mongoose)
 2. Install dependencies:
 
 Client:
-```cd client
-npm install```
+```cd client```
+```npm install```
 
 Server:
-```cd server
-   npm install```
+```cd server```
+```npm install```
 
 3. Environment variables
 
 Create a ```.env``` file in the root of the server folder
 
-```PORT=8080
-MONGO_URI=<your-mongo-db-uri>
-JWT_SECRET=<your-jwt-secret-key>
-PEPPER=<your-pepper-string>
-```
+```PORT=8080```
+```MONGO_URI=<your-mongo-db-uri>```
+```JWT_SECRET=<your-jwt-secret-key>```
+```PEPPER=<your-pepper-string>```
 
 4. Start the app
 
