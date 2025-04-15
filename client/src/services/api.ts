@@ -37,9 +37,7 @@ export const signUp = async (
 
     return response;
   } catch (error: any) {
-    throw error.response
-      ? error.response.data.message
-      : "Network error, please try again.";
+    throw error;
   }
 };
 

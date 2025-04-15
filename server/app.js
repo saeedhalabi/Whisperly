@@ -13,9 +13,6 @@ import http from "http";
 const port = process.env.PORT;
 const app = express();
 
-// Store the users and their socket IDs
-const connectedUsers = {};
-
 // Middleware
 app.use(corsMiddleware);
 app.use(logger);
@@ -37,13 +34,15 @@ const io = new Server(server, {
   },
 });
 
+// Store the users and their socket IDs
+const connectedUsers = {};
+
 // Handle socket connections
 io.on("connection", socket => {
   console.log("✅ a user connected:", socket.id);
 
   socket.on("registerUser", userId => {
     connectedUsers[userId] = socket.id;
-    console.log(`User ${userId} connected with socket ID ${socket.id}`);
   });
 
   // Handle sendMessage event
@@ -55,7 +54,6 @@ io.on("connection", socket => {
         senderId,
         receiverId,
       });
-      console.log(`Message sent to user ${receiverId}`);
     } else {
       console.log("Receiver not connected.");
     }
