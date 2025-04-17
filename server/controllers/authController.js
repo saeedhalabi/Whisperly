@@ -80,7 +80,7 @@ export const signIn = async (req, res) => {
     // Set JWT in a cookie
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
       sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000,
     });
@@ -90,6 +90,7 @@ export const signIn = async (req, res) => {
       message:
         "An unexpected error occurred during sign-in. Please try again later",
     });
+    k;
   }
 };
 
