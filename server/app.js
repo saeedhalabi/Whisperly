@@ -1,8 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import path from "path"; // Import path module for handling file paths
-import { fileURLToPath } from "url"; // Import fileURLToPath from 'url'
 dotenv.config();
 import { connectDB } from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
@@ -11,10 +9,6 @@ import logger from "./middleware/logger.js";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
 import http from "http";
-
-// Convert import.meta.url to __dirname in ES module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const port = process.env.PORT;
 const app = express();
@@ -28,16 +22,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/auth", authRoute);
-
-// Serve static assets in production (React's build folder)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend/build"))); // Serve static files from React build
-
-  // Catch-all route to serve index.html for frontend routes
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-  });
-}
 
 // Create HTTP server
 const server = http.createServer(app);
