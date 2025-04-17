@@ -1,6 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import path from "path"; // Import path module for handling file paths
+import { fileURLToPath } from "url"; // Import fileURLToPath from 'url'
 dotenv.config();
 import { connectDB } from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
@@ -9,7 +11,10 @@ import logger from "./middleware/logger.js";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
 import http from "http";
-import path from "path"; // Add this to use path to resolve static files
+
+// Convert import.meta.url to __dirname in ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const port = process.env.PORT;
 const app = express();
