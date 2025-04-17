@@ -83,6 +83,7 @@ export const signIn = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       maxAge: 24 * 60 * 60 * 1000,
+      path: "/",
     });
     res.status(200).json({ message: "You have signed in successfully", token });
   } catch (error) {
