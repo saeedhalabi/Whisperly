@@ -9,6 +9,7 @@ import logger from "./middleware/logger.js";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
 import http from "http";
+import path from "path"; // Add this to use path to resolve static files
 
 const port = process.env.PORT;
 const app = express();
@@ -22,6 +23,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/auth", authRoute);
+
+// Serve static assets in production (React's build folder)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend/build"))); // Serve static files from React build
+
+  // Catch-all route to serve index.html for frontend routes
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+}
 
 // Create HTTP server
 const server = http.createServer(app);
