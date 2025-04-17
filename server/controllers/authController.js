@@ -81,9 +81,8 @@ export const signIn = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000,
-      path: "/",
     });
     res.status(200).json({ message: "You have signed in successfully", token });
   } catch (error) {
