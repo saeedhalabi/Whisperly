@@ -29,7 +29,7 @@ const server = http.createServer(app);
 // Create socket server with CORS support
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://whisperly-frontend.onrender.com",
     credentials: true,
   },
 });
