@@ -5,7 +5,6 @@ const signInUrl = `${url}/api/auth/signin`;
 const signUpUrl = `${url}/api/auth/signup`;
 const logoutUrl = `${url}/api/auth/logout`;
 const getUsersUrl = `${url}/api/auth/users`;
-const getCurrentUserUrl = `${url}/api/auth/me`; // Add this line for the getCurrentUser URL
 
 export const signIn = async (email: string, password: string) => {
   try {
@@ -69,7 +68,7 @@ export const getUsers = async () => {
 // Function to get the current user
 export const getCurrentUser = async () => {
   try {
-    const response = await axios.get(getCurrentUserUrl, {
+    const response = await axios.get(`${url}/api/auth/me`, {
       withCredentials: true, // This ensures the cookie is sent
     });
 
