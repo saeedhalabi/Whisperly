@@ -156,10 +156,6 @@ export const getCurrentUser = async (req, res) => {
   try {
     const token = req.cookies.token;
 
-    if (!token) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await Auth.findById(decoded.userId).select(
       "id firstname lastname email"
