@@ -118,11 +118,6 @@ export const getUsers = async (req, res) => {
     // Extract the token from the cookie
     const token = req.cookies.token;
 
-    // If no token exists, return unauthorized
-    if (!token) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-
     // Verify the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
