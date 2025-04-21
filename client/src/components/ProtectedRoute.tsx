@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const auth = useContext(AuthContext);
 
-  // If not authenticated, redirect to /unauthorized
+  // Check if the user is authenticated, otherwise redirect to /unauthorized
   if (!auth?.isAuthenticated) {
     return <Navigate to="/unauthorized" replace />;
   }

@@ -10,10 +10,10 @@ export const signIn = async (email: string, password: string) => {
   try {
     const response = await axios.post(signInUrl, { email, password });
     const { token } = response.data;
-    localStorage.setItem("token", token);
 
-    // Dispatch a custom event to notify that the token has changed
-    window.dispatchEvent(new Event("tokenChange"));
+    if (token) {
+      localStorage.setItem("token", token);
+    }
 
     return response;
   } catch (error: any) {

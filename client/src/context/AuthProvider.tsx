@@ -9,19 +9,14 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
-    const checkAuth = () => {
-      const storedToken = localStorage.getItem("token");
-      setIsAuthenticated(!!storedToken);
-    };
-
-    checkAuth();
-
-    window.addEventListener("storage", checkAuth);
-
-    return () => {
-      window.removeEventListener("storage", checkAuth);
-    };
-  }, []);
+    // Immediately check for token in localStorage after page refresh
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, []); // Only run once on mount (refresh)
 
   return (
     <AuthContext.Provider value={{ isAuthenticated }}>
