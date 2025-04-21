@@ -21,6 +21,6 @@ router.post("/logout", logout);
 router.get("/users", getUsers);
 
 // Current User
-router.get("/me", getCurrentUser);
+router.get("/profile", validateSession, getCurrentUser);
 
 export default router;
