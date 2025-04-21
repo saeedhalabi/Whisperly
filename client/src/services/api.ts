@@ -59,7 +59,7 @@ export const signUp = async (
 
 export const logout = async () => {
   try {
-    localStorage.removeItem("token"); // Remove the token from localStorage
+    localStorage.removeItem("token");
     const response = await axios.post(logoutUrl);
     return response;
   } catch (error: any) {
