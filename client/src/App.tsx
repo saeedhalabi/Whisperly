@@ -45,7 +45,7 @@ const App: React.FC = () => {
         console.error("Error setting up socket:", error);
 
         // Redirect to the 401 page
-        navigate("/unauthorized"); // Redirects to the unauthorized page
+        navigate("/401"); // Redirects to the unauthorized page
       }
     };
 
