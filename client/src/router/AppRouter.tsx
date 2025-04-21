@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router";
 import SignUpPage from "../pages/SignUpPage";
 import SignInPage from "../pages/SignInPage";
 import Homepage from "../pages/Homepage";
-
+import UnauthorizedPage from "../pages/UnauthorizedPage";
 const AppRouter: React.FC = () => {
   return (
     <Routes>
@@ -10,6 +10,8 @@ const AppRouter: React.FC = () => {
       <Route path="/sign-in" element={<SignInPage />} />
 
       <Route path="/home-page" element={<Homepage />} />
+
+      <Route path="/401" element={<UnauthorizedPage />} />
     </Routes>
   );
 };
