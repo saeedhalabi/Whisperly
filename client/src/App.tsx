@@ -1,5 +1,4 @@
 import { useEffect, useContext, useRef } from "react";
-import { useNavigate } from "react-router";
 import AppRouter from "./router/AppRouter";
 import { socket } from "./utils/socket";
 import { getCurrentUser } from "./services/api";
@@ -8,7 +7,6 @@ import ChatContext from "./context/ChatContext";
 const App: React.FC = () => {
   const { setAllMessages } = useContext(ChatContext);
   const socketInitialized = useRef(false);
-  const navigate = useNavigate(); // Initialize the navigate function
 
   useEffect(() => {
     if (socketInitialized.current) return;
@@ -19,7 +17,6 @@ const App: React.FC = () => {
 
     const setupSocket = async () => {
       try {
-        // Get the current user, if no user, navigate to the 401 page
         const currentUser = await getCurrentUser();
         socket.emit("registerUser", currentUser._id);
 
@@ -43,9 +40,6 @@ const App: React.FC = () => {
         });
       } catch (error) {
         console.error("Error setting up socket:", error);
-
-        // Redirect to the 401 page
-        navigate("/401"); // Redirects to the unauthorized page
       }
     };
 
@@ -65,7 +59,7 @@ const App: React.FC = () => {
       socket.off("connect");
       socket.off("disconnect");
     };
-  }, [setAllMessages, navigate]);
+  }, [setAllMessages]);
 
   return <AppRouter />;
 };
