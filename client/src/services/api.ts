@@ -6,21 +6,6 @@ const signUpUrl = `${url}/api/auth/signup`;
 const logoutUrl = `${url}/api/auth/logout`;
 const getUsersUrl = `${url}/api/auth/users`;
 
-// Add an axios request interceptor to include the token
-axios.interceptors.request.use(
-  config => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      // Add token to Authorization header if it's available
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
-
 export const signIn = async (email: string, password: string) => {
   try {
     const response = await axios.post(signInUrl, { email, password });
@@ -59,7 +44,7 @@ export const signUp = async (
 
 export const logout = async () => {
   try {
-    localStorage.removeItem("token");
+    localStorage.removeItem("token"); // Remove the token from localStorage
     const response = await axios.post(logoutUrl);
     return response;
   } catch (error: any) {
@@ -71,7 +56,17 @@ export const logout = async () => {
 
 export const getUsers = async () => {
   try {
-    const response = await axios.get(getUsersUrl);
+    const token = localStorage.getItem("token"); // Get token from localStorage
+
+    if (!token) {
+      throw new Error("No token found. Please sign in.");
+    }
+
+    const response = await axios.get(getUsersUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Send token in Authorization header
+      },
+    });
     return response.data.users;
   } catch (error: any) {
     throw error.response
@@ -83,7 +78,18 @@ export const getUsers = async () => {
 // Function to get the current user
 export const getCurrentUser = async () => {
   try {
-    const response = await axios.get(`${url}/api/auth/me`);
+    const token = localStorage.getItem("token"); // Get token from localStorage
+
+    if (!token) {
+      throw new Error("No token found. Please sign in.");
+    }
+
+    const response = await axios.get(`${url}/api/auth/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Send token in Authorization header
+      },
+    });
+
     return response.data.user;
   } catch (error: any) {
     throw error.response
