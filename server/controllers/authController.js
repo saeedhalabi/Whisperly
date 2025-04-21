@@ -90,7 +90,6 @@ export const signIn = async (req, res) => {
       message:
         "An unexpected error occurred during sign-in. Please try again later",
     });
-    k;
   }
 };
 
