@@ -68,11 +68,11 @@ export const getUsers = async () => {
 // Function to get the current user
 export const getCurrentUser = async () => {
   try {
-    const response = await axios.get(`${url}/api/auth/profile`, {
-      withCredentials: true,
+    const response = await axios.get(`${url}/api/auth/me`, {
+      withCredentials: true, // This ensures the cookie is sent
     });
 
-    return response.data.user;
+    return response.data.user; // Return the user object
   } catch (error: any) {
     throw error.response
       ? error.response.data.message
