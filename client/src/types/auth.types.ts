@@ -10,3 +10,7 @@ export interface SignUpFormData {
   password: string;
   confirmPassword: string;
 }
+
+export interface isAuth {
+  isAuthenticated: boolean;
+}
