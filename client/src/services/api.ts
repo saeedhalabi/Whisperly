@@ -8,11 +8,9 @@ const getUsersUrl = `${url}/api/auth/users`;
 
 export const signIn = async (email: string, password: string) => {
   try {
-    const response = await axios.post(
-      signInUrl,
-      { email, password },
-      { withCredentials: true }
-    );
+    const response = await axios.post(signInUrl, { email, password });
+    const { token } = response.data;
+    localStorage.setItem("token", token);
 
     return response;
   } catch (error: any) {

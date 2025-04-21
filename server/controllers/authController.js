@@ -77,13 +77,6 @@ export const signIn = async (req, res) => {
       expiresIn: "1d",
     });
 
-    // Set JWT in a cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000,
-    });
     res.status(200).json({ message: "You have signed in successfully", token });
   } catch (error) {
     res.status(500).json({
@@ -153,7 +146,11 @@ export const getUsers = async (req, res) => {
 // Get current user info from token
 export const getCurrentUser = async (req, res) => {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    const token = authHeader.split(" ")[1];
 
     if (!token) {
       return res.status(401).json({ message: "Unauthorized" });
