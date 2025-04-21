@@ -41,7 +41,8 @@ export const signUp = async (
 
 export const logout = async () => {
   try {
-    const response = await axios.post(logoutUrl, {}, { withCredentials: true });
+    localStorage.removeItem("token"); // Remove the token from localStorage
+    const response = await axios.post(logoutUrl);
     return response;
   } catch (error: any) {
     throw error.response
@@ -52,8 +53,16 @@ export const logout = async () => {
 
 export const getUsers = async () => {
   try {
+    const token = localStorage.getItem("token"); // Get token from localStorage
+
+    if (!token) {
+      throw new Error("No token found. Please sign in.");
+    }
+
     const response = await axios.get(getUsersUrl, {
-      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${token}`, // Send token in Authorization header
+      },
     });
     return response.data.users;
   } catch (error: any) {
@@ -66,11 +75,19 @@ export const getUsers = async () => {
 // Function to get the current user
 export const getCurrentUser = async () => {
   try {
+    const token = localStorage.getItem("token"); // Get token from localStorage
+
+    if (!token) {
+      throw new Error("No token found. Please sign in.");
+    }
+
     const response = await axios.get(`${url}/api/auth/me`, {
-      withCredentials: true, // This ensures the cookie is sent
+      headers: {
+        Authorization: `Bearer ${token}`, // Send token in Authorization header
+      },
     });
 
-    return response.data.user; // Return the user object
+    return response.data.user;
   } catch (error: any) {
     throw error.response
       ? error.response.data.message

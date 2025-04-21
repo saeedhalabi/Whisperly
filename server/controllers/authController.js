@@ -89,12 +89,6 @@ export const signIn = async (req, res) => {
 // logout function
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
-    });
-
     res.status(200).json({ message: "You have been logged out successfully" });
   } catch (error) {
     console.error("Logout Error:", error);
@@ -107,21 +101,16 @@ export const logout = async (req, res) => {
 // get users
 export const getUsers = async (req, res) => {
   try {
-    // Extract the token from the cookie
-    const token = req.cookies.token;
+    const token = req.headers.authorization?.split(" ")[1]; // Extract token from the Authorization header
 
-    // If no token exists, return unauthorized
     if (!token) {
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-    // Verify the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Get the authenticated user's ID
     const currentUserId = decoded.userId;
 
-    // Fetch all users excluding the current user
     const users = await Auth.find(
       { _id: { $ne: currentUserId } },
       "id firstname lastname"
@@ -146,11 +135,7 @@ export const getUsers = async (req, res) => {
 // Get current user info from token
 export const getCurrentUser = async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-    const token = authHeader.split(" ")[1];
+    const token = req.headers.authorization?.split(" ")[1]; // Extract token from the Authorization header
 
     if (!token) {
       return res.status(401).json({ message: "Unauthorized" });
