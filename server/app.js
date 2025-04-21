@@ -32,6 +32,8 @@ const io = new Server(server, {
     origin: "https://whisperly-frontend.onrender.com",
     credentials: true,
   },
+  pingInterval: 25000,
+  pingTimeout: 5000,
 });
 
 // Store the users and their socket IDs
