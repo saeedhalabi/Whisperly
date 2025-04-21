@@ -27,8 +27,6 @@ const ChatWindow: React.FC = () => {
         isSender: true,
       };
 
-      console.log("Sending message:", newMessage);
-
       // Update the state for the new message in the chat window
       setAllMessages(prev => {
         const prevMsgs = prev[selectedUser._id] || [];
