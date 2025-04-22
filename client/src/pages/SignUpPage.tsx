@@ -128,7 +128,6 @@ const SignUpPage: React.FC = () => {
           </button>
         </div>
 
-        {/* Confirm Password Field with FontAwesome Eye Toggle */}
         <div className="relative">
           <InputField
             type={showConfirmPassword ? "text" : "password"}

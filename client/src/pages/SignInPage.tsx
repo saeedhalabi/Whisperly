@@ -6,6 +6,8 @@ import { useNavigate } from "react-router";
 import { signIn } from "../services/api";
 import { SignInFormData } from "../types/auth.types";
 import SignIn from "../features/auth/SignIn";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const SignInPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ const SignInPage: React.FC = () => {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -65,17 +68,29 @@ const SignInPage: React.FC = () => {
           onChange={handleChange}
           autoComplete="email"
         />
-        <InputField
-          type="password"
-          name="password"
-          label="Password"
-          value={formData.password}
-          onChange={handleChange}
-          autoComplete="new-password"
-        />
+
+        <div className="relative">
+          <InputField
+            type={showPassword ? "text" : "password"}
+            name="password"
+            label="Password"
+            value={formData.password}
+            onChange={handleChange}
+            autoComplete="current-password"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(prev => !prev)}
+            className="absolute right-3 top-8 text-gray-600 text-lg"
+          >
+            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+          </button>
+        </div>
+
         {error && (
           <div className="text-red-700 text-sm text-center">{error}</div>
         )}
+
         <Button text={loading ? "Signing In..." : "Sign In"} />
         <SignIn />
       </form>
