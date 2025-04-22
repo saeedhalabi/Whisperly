@@ -124,7 +124,7 @@ const SignUpPage: React.FC = () => {
             onClick={() => setShowPassword(prev => !prev)}
             className="absolute right-3 top-8 text-gray-600 text-lg"
           >
-            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
           </button>
         </div>
 
@@ -142,7 +142,7 @@ const SignUpPage: React.FC = () => {
             onClick={() => setShowConfirmPassword(prev => !prev)}
             className="absolute right-3 top-8 text-gray-600 text-lg"
           >
-            <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+            <FontAwesomeIcon icon={showConfirmPassword ? faEye : faEyeSlash} />
           </button>
         </div>
 
