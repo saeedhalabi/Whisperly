@@ -41,7 +41,7 @@ const connectedUsers = {};
 
 // Handle socket connections
 io.on("connection", socket => {
-  console.log("✅ a user connected:", socket.id);
+  console.log("✅ a user connected");
 
   socket.on("registerUser", userId => {
     connectedUsers[userId] = socket.id;
@@ -74,7 +74,7 @@ io.on("connection", socket => {
     for (const userId in connectedUsers) {
       if (connectedUsers[userId] === socket.id) {
         delete connectedUsers[userId];
-        console.log(`User ${userId} disconnected`);
+        console.log("❌ a user disconnected");
         break;
       }
     }
