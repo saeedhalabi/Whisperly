@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router";
-import { navItemClasses } from "../utils/navbarUtils";
 import { logout } from "../services/api";
 const Navbar = () => {
   const navigate = useNavigate();
@@ -28,12 +27,6 @@ const Navbar = () => {
             </li>
           )}
 
-          <li className={navItemClasses()} onClick={() => navigate("/sign-in")}>
-            Sign In
-          </li>
-          <li className={navItemClasses()} onClick={() => navigate("/")}>
-            Sign Up
-          </li>
           <li className="text-black" onClick={handleSubmit}>
             Log out
           </li>
