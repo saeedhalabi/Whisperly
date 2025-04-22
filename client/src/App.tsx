@@ -1,4 +1,4 @@
-import { useEffect, useContext, useRef } from "react";
+import { useEffect, useContext, useState } from "react";
 import AppRouter from "./router/AppRouter";
 import { socket } from "./utils/socket";
 import { getCurrentUser } from "./services/api";
@@ -6,13 +6,18 @@ import ChatContext from "./context/ChatContext";
 
 const App: React.FC = () => {
   const { setAllMessages } = useContext(ChatContext);
-  const socketInitialized = useRef(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
-    if (socketInitialized.current) return;
-    socketInitialized.current = true;
+    const userEmail = localStorage.getItem("userEmail");
+    if (userEmail) {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
-    // Connect to the socket
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
     socket.connect();
 
     const setupSocket = async () => {
@@ -24,7 +29,7 @@ const App: React.FC = () => {
           const currentUser = await getCurrentUser();
 
           if (message.senderId === currentUser._id) {
-            return; // Ignore messages sent by the current user
+            return;
           }
 
           setAllMessages(prev => {
@@ -59,7 +64,7 @@ const App: React.FC = () => {
       socket.off("connect");
       socket.off("disconnect");
     };
-  }, [setAllMessages]);
+  }, [isAuthenticated, setAllMessages]);
 
   return <AppRouter />;
 };
