@@ -50,14 +50,6 @@ const App: React.FC = () => {
 
     setupSocket();
 
-    socket.on("connect", () => {
-      console.log("✅ Connected to server");
-    });
-
-    socket.on("disconnect", () => {
-      console.log("❌ Disconnected from server");
-    });
-
     // Cleanup socket on unmount
     return () => {
       socket.off("receiveMessage");
