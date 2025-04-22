@@ -27,7 +27,7 @@ const Navbar = () => {
             </li>
           )}
 
-          <li className="text-black" onClick={handleSubmit}>
+          <li className="text-black mt-10 sm:mt-0" onClick={handleSubmit}>
             Log out
           </li>
         </ul>
