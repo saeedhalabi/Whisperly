@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { signIn } from "../services/api";
 import { SignInFormData } from "../types/auth.types";
 import SignIn from "../features/auth/SignIn";
+import { socket } from "../utils/socket";
 
 const SignInPage: React.FC = () => {
   const navigate = useNavigate();
@@ -28,7 +29,6 @@ const SignInPage: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
     setError(null);
     setLoading(true);
 
@@ -36,15 +36,18 @@ const SignInPage: React.FC = () => {
       const response = await signIn(formData.email, formData.password);
 
       if (response.status === 200) {
+        const user = response.data; // must include _id
+
+        // ✅ Connect socket only after successful login
+        socket.connect();
+        socket.emit("registerUser", user._id);
+
         localStorage.setItem("userEmail", formData.email);
-        setFormData({
-          email: "",
-          password: "",
-        });
+        setFormData({ email: "", password: "" });
         navigate("/home-page");
       }
     } catch (error: any) {
-      setError(error || "Something went wrong");
+      setError(error?.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
