@@ -1,5 +1,7 @@
 import { ChangeEvent, useState, FormEvent } from "react";
 import { useNavigate } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import Title from "../components/Title";
@@ -20,6 +22,9 @@ const SignUpPage: React.FC = () => {
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -103,22 +108,45 @@ const SignUpPage: React.FC = () => {
           onChange={handleChange}
           autoComplete="email"
         />
-        <InputField
-          type="password"
-          name="password"
-          label="Password"
-          value={formData.password}
-          onChange={handleChange}
-          autoComplete="new-password"
-        />
-        <InputField
-          type="password"
-          name="confirmPassword"
-          label="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          autoComplete="new-password"
-        />
+
+        {/* Password Field with FontAwesome Eye Toggle */}
+        <div className="relative">
+          <InputField
+            type={showPassword ? "text" : "password"}
+            name="password"
+            label="Password"
+            value={formData.password}
+            onChange={handleChange}
+            autoComplete="new-password"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(prev => !prev)}
+            className="absolute right-3 top-8 text-gray-600 text-lg"
+          >
+            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+          </button>
+        </div>
+
+        {/* Confirm Password Field with FontAwesome Eye Toggle */}
+        <div className="relative">
+          <InputField
+            type={showConfirmPassword ? "text" : "password"}
+            name="confirmPassword"
+            label="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            autoComplete="new-password"
+          />
+          <button
+            type="button"
+            onClick={() => setShowConfirmPassword(prev => !prev)}
+            className="absolute right-3 top-8 text-gray-600 text-lg"
+          >
+            <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+          </button>
+        </div>
+
         {error && (
           <div className="text-red-700 text-sm text-center">{error}</div>
         )}
