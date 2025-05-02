@@ -31,19 +31,18 @@ const SignInPage: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
     setError(null);
     setLoading(true);
-
+  
     try {
       const response = await signIn(formData.email, formData.password);
-
+  
       if (response.status === 200) {
+        // Store the token
         localStorage.setItem("userEmail", formData.email);
-        setFormData({
-          email: "",
-          password: "",
-        });
+        localStorage.setItem("token", response.data.token);
+  
+        // Navigate immediately after storing token
         navigate("/home-page");
       }
     } catch (error: any) {
@@ -52,6 +51,7 @@ const SignInPage: React.FC = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <main className="bg-image flex flex-col items-center justify-center">
