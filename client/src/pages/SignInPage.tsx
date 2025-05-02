@@ -38,7 +38,6 @@ const SignInPage: React.FC = () => {
       const response = await signIn(formData.email, formData.password);
   
       if (response.status === 200) {
-        // Store the token
         localStorage.setItem("userEmail", formData.email);
         localStorage.setItem("token", response.data.token);
   
