@@ -10,11 +10,11 @@ const UserList: React.FC = () => {
   useEffect(() => {
     const fetchToken = () => {
       const storedToken = localStorage.getItem("token");
-      setToken(storedToken); // Set token from localStorage
+      setToken(storedToken);
     };
 
     fetchToken();
-  }, []); // Runs only once on component mount
+  }, []);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -29,7 +29,7 @@ const UserList: React.FC = () => {
     };
 
     fetchUsers();
-  }, [token]); // Runs whenever token is updated
+  }, [token]);
 
   return (
     <section className="bg-gradient-to-r from-indigo-600 to-indigo-400 w-full sm:w-64 ml-0 sm:ml-10 h-auto p-4 sm:p-6 rounded-b-xs rounded-t-md shadow-md translate-y-[-2] sm:translate-y-10">
@@ -37,7 +37,6 @@ const UserList: React.FC = () => {
         Select a chat...
       </p>
 
-      {/* Map through users and render UserItem */}
       <div>
         {users.map(user => (
           <UserItem key={user._id} user={user} />
