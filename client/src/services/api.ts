@@ -38,7 +38,7 @@ export const signUp = async (
 
 export const logout = async () => {
   try {
-    localStorage.removeItem("token"); // Remove the token from localStorage
+    localStorage.removeItem("token");
     const response = await axios.post(logoutUrl);
     return response;
   } catch (error: any) {
@@ -56,7 +56,7 @@ export const getUsers = async (token: string) => {
 
     const response = await axios.get(getUsersUrl, {
       headers: {
-        Authorization: `Bearer ${token}`, // Send token in Authorization header
+        Authorization: `Bearer ${token}`,
       },
     });
     return response.data.users;
@@ -70,7 +70,7 @@ export const getUsers = async (token: string) => {
 // Function to get the current user
 export const getCurrentUser = async () => {
   try {
-    const token = localStorage.getItem("token"); // Get token from localStorage
+    const token = localStorage.getItem("token");
 
     if (!token) {
       throw new Error("No token found. Please sign in.");
@@ -78,7 +78,7 @@ export const getCurrentUser = async () => {
 
     const response = await axios.get(`${url}/api/auth/me`, {
       headers: {
-        Authorization: `Bearer ${token}`, // Send token in Authorization header
+        Authorization: `Bearer ${token}`,
       },
     });
 
