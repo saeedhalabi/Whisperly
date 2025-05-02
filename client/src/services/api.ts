@@ -48,10 +48,8 @@ export const logout = async () => {
   }
 };
 
-export const getUsers = async () => {
+export const getUsers = async (token: string) => {
   try {
-    const token = localStorage.getItem("token"); // Get token from localStorage
-
     if (!token) {
       throw new Error("No token found. Please sign in.");
     }
