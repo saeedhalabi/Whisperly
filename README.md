@@ -61,7 +61,7 @@ Client: ```npm run dev```
 ### 🔐 Login Page
 ![Login Page](./screenshots/2.png)
 
-### Signup Page
+### 🔓 Signup Page
 ![Signup Page](./screenshots/1.png)
 
 # 📬 Contact
