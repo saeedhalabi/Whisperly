@@ -1,7 +1,7 @@
 import cors from "cors";
 
 const corsMiddleware = cors({
-  origin: "https://whisperly-frontend.onrender.com",
+  origin: ["http://localhost:5173", "https://whisperly-frontend.onrender.com"],
   credentials: true,
 });
 

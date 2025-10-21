@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 
 interface InputProps {
   type: string;
@@ -7,6 +7,8 @@ interface InputProps {
   name: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   autoComplete?: string;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyUp?: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const InputField = ({
@@ -16,6 +18,8 @@ const InputField = ({
   name,
   onChange,
   autoComplete,
+  onKeyDown,
+  onKeyUp,
 }: InputProps) => {
   return (
     <section className="flex flex-col">
@@ -26,6 +30,8 @@ const InputField = ({
         name={name}
         onChange={onChange}
         autoComplete={autoComplete}
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
         className="w-full px-4 py-2 text-gray-700 bg-white border border-[#d9dbe9] rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 drop-shadow-xs"
         required
       />
