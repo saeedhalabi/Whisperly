@@ -6,8 +6,6 @@ const signUpUrl = `${url}/api/auth/signup`;
 const logoutUrl = `${url}/api/auth/logout`;
 const getUsersUrl = `${url}/api/auth/users`;
 
-console.log("Backend API URL:", url);
-
 export const signIn = async (email: string, password: string) => {
   try {
     const response = await axios.post(
