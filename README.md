@@ -76,3 +76,5 @@ Got feedback, ideas, or questions? Let’s connect!
 📧 [Email Me](https://mail.google.com/mail/?view=cm&fs=1&to=saeedrhalabi@gmail.com)  
 💼 [LinkedIn](https://www.linkedin.com/in/saeed-halabi)  
 🌐 [Portfolio](https://saeedhalabi.com)  
+
+---
