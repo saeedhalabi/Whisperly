@@ -47,34 +47,15 @@ Create a ```.env``` file in the root of the server folder
 Server: ```npm run dev```
 Client: ```npm run dev```
 
-## What I learned
-
-- How to manage real-time data flow using Socket.io
-- Working with authentication and JWT tokens
-- Structuring full-stack applications with clean separation of concerns
-- MongoDB integration and data modeling
-
 ---
 
 ## 📸 Screenshots
 
-###  🖼️ Chat UI
 ![Chat UI](./screenshots/4.png)
 
-### 🔐 Login Page
 ![Login Page](./screenshots/2.png)
 
-### 🔓 Signup Page
 ![Signup Page](./screenshots/1.png)
 
 ---
-
-## 📬 Contact
-
-Got feedback, ideas, or questions? Let’s connect!  
-
-📧 [Email Me](https://mail.google.com/mail/?view=cm&fs=1&to=saeedrhalabi@gmail.com)  
-💼 [LinkedIn](https://www.linkedin.com/in/saeed-halabi)  
-🌐 [Portfolio](https://saeedhalabi.com)  
-
----
+Designed and developed by Saeed Halabi
