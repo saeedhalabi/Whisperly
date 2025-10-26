@@ -11,11 +11,23 @@ A real-time chat application built with the MERN stack (MongoDB, Express.js, Rea
 - 🗃️ MongoDB for User Storage
 - 🧾 Clean and minimal design
 
+
 ## 🛠️ Tech Stack
 
-Frontend: React, CSS, Tailwind CSS, Axios
-Backend: Node.js, Express.js, Socket.io
-Database: MongoDB (with Mongoose)
+**Frontend**  
+- ⚛️ React – Component-based UI library  
+- 🎨 CSS & Tailwind CSS – Styling and responsive design  
+- 🔗 Axios – HTTP client for API requests  
+
+**Backend**  
+- 🟢 Node.js – JavaScript runtime environment  
+- 🚀 Express.js – Web framework for building APIs  
+- 📡 Socket.io – Real-time communication  
+
+**Database**  
+- 🍃 MongoDB – NoSQL database for flexible data storage  
+- 🧬 Mongoose – ODM for MongoDB, schema-based modeling
+
 
 ---
 
@@ -58,4 +70,4 @@ Client: ```npm run dev```
 ![Signup Page](./screenshots/1.png)
 
 ---
-Designed and developed by Saeed Halabi
+<p align="center"><strong>Designed and developed by Saeed Halabi</strong></p>
