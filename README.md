@@ -7,7 +7,7 @@ A real-time chat application built with the MERN stack (MongoDB, Express.js, Rea
 - 🔐 User Authentication (Login/Register)
 - 📩 Real-time Messaging with Socket.io
 - 💬 Private Chats
-- 📱 Responsive UI (Mobile & Desktop Friendly)
+- 📱  Responsive UI (Mobile & Desktop Friendly)
 - 🗃️ MongoDB for User Storage
 - 🧾 Clean and minimal design
 
