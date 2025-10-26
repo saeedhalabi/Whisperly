@@ -15,18 +15,18 @@ A real-time chat application built with the MERN stack (MongoDB, Express.js, Rea
 ## 🛠️ Tech Stack
 
 **Frontend**  
-- ⚛️ React – Component-based UI library  
-- 🎨 CSS & Tailwind CSS – Styling and responsive design  
-- 🔗 Axios – HTTP client for API requests  
+- ⚛️ React  
+- 🎨 CSS & Tailwind CSS  
+- 🔗 Axios  
 
 **Backend**  
-- 🟢 Node.js – JavaScript runtime environment  
-- 🚀 Express.js – Web framework for building APIs  
-- 📡 Socket.io – Real-time communication  
+- 🟢 Node.js  
+- 🚀 Express.js   
+- 📡 Socket.io  
 
 **Database**  
-- 🍃 MongoDB – NoSQL database for flexible data storage  
-- 🧬 Mongoose – ODM for MongoDB, schema-based modeling
+- 🍃 MongoDB   
+- 🧬 Mongoose
 
 
 ---
