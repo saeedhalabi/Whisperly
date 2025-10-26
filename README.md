@@ -64,12 +64,11 @@ Client: ```npm run dev```
 ### 🔓 Signup Page
 ![Signup Page](./screenshots/1.png)
 
-# 📬 Contact
-Have questions, feedback, or want to collaborate?
-Feel free to reach out or follow me:
 
-GitHub: @saeedhalabi
+## 📬 Contact
 
-LinkedIn: [https://www.linkedin.com/in/saeed-halabi]
+Got feedback, ideas, or questions? Let’s connect!  
 
-Portfolio: [https://saeedhalabi.com]
+📧 [Email Me](https://mail.google.com/mail/?view=cm&fs=1&to=saeedrhalabi@gmail.com)  
+💼 [LinkedIn](https://www.linkedin.com/in/saeed-halabi)  
+🌐 [Portfolio](https://saeedhalabi.com)  
