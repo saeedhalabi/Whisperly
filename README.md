@@ -17,6 +17,7 @@ Frontend: React, CSS, Tailwind CSS, Axios
 Backend: Node.js, Express.js, Socket.io
 Database: MongoDB (with Mongoose)
 
+---
 
 ## 📦 Installation
 
@@ -53,6 +54,8 @@ Client: ```npm run dev```
 - Structuring full-stack applications with clean separation of concerns
 - MongoDB integration and data modeling
 
+---
+
 ## 📸 Screenshots
 
 ###  🖼️ Chat UI
@@ -64,6 +67,7 @@ Client: ```npm run dev```
 ### 🔓 Signup Page
 ![Signup Page](./screenshots/1.png)
 
+---
 
 ## 📬 Contact
 
